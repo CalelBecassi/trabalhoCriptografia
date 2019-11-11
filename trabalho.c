@@ -6,7 +6,21 @@
 
 typedef __uint128_t gint;
 
-/*void fabio(char tarefa){
+void fabio(char tarefa){
+
+	int mdc(int x, int y){
+		int resto;
+
+    	do {
+        	resto = x % y;
+
+        	x = y;
+        	y = resto;
+
+    	} while (resto != 0);
+
+    	return x;
+	}
 
 	unsigned long int r;
 
@@ -17,7 +31,7 @@ typedef __uint128_t gint;
 
 	else if(tarefa == 'X'){
 
-		scanf()
+		//scanf()
 
 		while(mdc(r, n) != 1){
 
@@ -34,7 +48,12 @@ typedef __uint128_t gint;
 
 	}
 
-}*/
+}
+
+void patricia(char tarefa){
+
+
+}
 
 void teodoro(char tarefa){
 
