@@ -22,25 +22,33 @@ int mdc(int x, int y){
 
 void fabio(char tarefa){
 
-	unsigned long int r;
+	unsigned long int r, x;
+	bool verificado = false;
 
 	if(tarefa == 'I'){
 
-		if(((((s * s) % n) * v) % n) == 1)
+		if(((((s * s) % n) * v) % n) == 1){
 			printf("C\n");
+			verificado = true;
+		}
 		else
 			printf("E\n");
 	}
 
 	else if(tarefa == 'X'){
 
-		//scanf()
+		if(verificado){
 
-		while(mdc(r, n) != 1){
+			while(mdc(r, n) != 1){
 
-			srand((unsigned)time(NULL));
-			r = rand();
+				srand((unsigned)time(NULL));
+				r = rand();
+			}
+
+			x = (((r % n) * r) % n); /******************* PAREI AQUI **********/
 		}
+		else
+			printf("E\n");
 	}
 
 	else if(tarefa == 'R'){
