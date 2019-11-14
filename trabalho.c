@@ -6,9 +6,7 @@
 
 typedef __uint128_t gint;
 
-void fabio(char tarefa){
-
-	int mdc(int x, int y){
+int mdc(int x, int y){
 		int resto;
 
     	do {
@@ -22,11 +20,16 @@ void fabio(char tarefa){
     	return x;
 	}
 
-	unsigned long int r;
+void fabio(char tarefa){
 
+	unsigned long int r;
 
 	if(tarefa == 'I'){
 
+		if(((((s * s) % n) * v) % n) == 1)
+			printf("C\n");
+		else
+			printf("E\n");
 	}
 
 	else if(tarefa == 'X'){
@@ -43,11 +46,6 @@ void fabio(char tarefa){
 	else if(tarefa == 'R'){
 
 	}
-
-	else if(tarefa == 'T'){
-
-	}
-
 }
 
 void patricia(char tarefa){
