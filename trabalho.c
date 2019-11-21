@@ -8,7 +8,7 @@
 typedef __uint128_t gint;
 bool verificado = false;
 
-int mdc(int x, int y){
+unsigned long int mdc(int x, int y){
 		int resto;
 
     	do {
@@ -24,7 +24,7 @@ int mdc(int x, int y){
 
 void fabio(char tarefa){
 
-	unsigned long int r, x, n, s, v;
+	unsigned long int r, x, n, s, v, y;
 	int b;
 
 	if(tarefa == 'I'){
@@ -43,10 +43,11 @@ void fabio(char tarefa){
 
 		if(verificado){
 
-			while(mdc(r, n) != 1){
+			while(mdc(r, n) != 1){//não ta entrando após ter sido executado 1x
 
-				srand((unsigned)time(NULL));
+				srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
 				r = rand();
+				printf("%lu\n", r);
 			}
 
 			x = (((r % n) * r) % n); //x Sempre o mesmo, e depois de rodar tarefe P o x passa a ser o mesmo do x da P
@@ -80,10 +81,16 @@ void fabio(char tarefa){
 		scanf("%d", &b);
 
 		if(b == 0)
-			printf("%lu\n", r);
+			printf("C %lu\n", r);
 		
-		else if
-			r * s % n //tem que adaptar pra caso r 128 bits
+		else if(b == 1){
+
+			y = (((r % n) * s) % n); //tem que adaptar pra caso r 128 bits
+			printf("C %lu\n", y);
+		}
+
+		else
+			printf("E\n");
 	}
 }
 
@@ -96,7 +103,7 @@ void teodoro(char tarefa){ // TODO CAGADO
 
 	unsigned long int p, q;
 	char num[50];
-	__uint128_t n;
+	gint n;
 
 	if(tarefa == 'I'){
 
@@ -104,7 +111,7 @@ void teodoro(char tarefa){ // TODO CAGADO
 		printf("%lu\n", p );
 		scanf("%lu", &q);
 
-		//n = 340282366920938463463374607431768;
+		n = 340282366920938463l;
 
 		sprintf(num, "%lu", n);
 
@@ -121,6 +128,8 @@ int main(int argc, char *argv[]){
 		fabio(tarefa);
 		scanf("%c", &tarefa);
 	}
+
+	printf("C\n");
 
 	return 0;
 }
