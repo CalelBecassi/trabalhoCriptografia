@@ -6,7 +6,7 @@
 #include<stdbool.h>
 
 typedef __uint128_t gint;
-bool verificado = false;
+bool verificado = false, resp = false/*, iniciado = false*/;
 
 unsigned long int mdc(int x, int y){
 		int resto;
@@ -47,16 +47,18 @@ void fabio(char tarefa){
 
 				srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
 				r = rand();
-				printf("%lu\n", r);
+				printf("%lu\n", r); //pra testar os r gerados e se entra no laço
 			}
 
 			x = (((r % n) * r) % n); //x Sempre o mesmo, e depois de rodar tarefe P o x passa a ser o mesmo do x da P
 
 			printf("C %lu\n", x);
+			//iniciado = true;
 		}
 		else{
 
-			printf("E\n"); //FALTA FINALIZAR PROGRAMA APÓS ERRO
+			printf("E\n");
+			exit(0);
 		}
 	}
 
@@ -72,21 +74,33 @@ void fabio(char tarefa){
 		}
 		else{
 
-			printf("E\n"); //FALTA FINALIZAR PROGRAMA APÓS ERRO
+			printf("E\n");
+			exit(0);
 		}
 	}
 
-	else if(tarefa == 'R'){
+	else if(tarefa == 'R'){ //falta corrigir a impressão de erro caso não foi iniciado ainda
 
 		scanf("%d", &b);
 
-		if(b == 0)
+		/*if(resp || iniciado == false){
+			printf("E\n");
+			exit(0);
+		}*/
+
+		if(b == 0){
+
 			printf("C %lu\n", r);
+			r = 0;
+			resp = true;
+		}
 		
 		else if(b == 1){
 
 			y = (((r % n) * s) % n); //tem que adaptar pra caso r 128 bits
 			printf("C %lu\n", y);
+			r = 0;
+			resp = true;
 		}
 
 		else
