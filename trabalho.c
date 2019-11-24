@@ -5,8 +5,7 @@
 #include<string.h>
 #include<stdbool.h>
 
-typedef __uint128_t gint;
-bool verificado = false, resp = false/*, iniciado = false*/;
+bool verificado = false, resp = false;
 
 unsigned long int mdc(int x, int y){
 		int resto;
@@ -20,7 +19,7 @@ unsigned long int mdc(int x, int y){
     	} while (resto != 0);
 
     	return x;
-	}
+}
 
 void fabio(){
 
@@ -47,21 +46,20 @@ void fabio(){
 
 			break;
 
-			case 'X': //ERRO,SEMPRE QUE EXECUTA A TAREFA, O x É O MESMO E DEVERIA SER DIFERENTE
+			case 'X':
 
 				if(verificado){
 
-					while(mdc(r, n) != 1){//não ta entrando após ter sido executado 1x
+					r = 0;
+					while(mdc(r, n) != 1){
 
 						srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
 						r = rand();
-						printf("%lu\n", r); //pra testar os r gerados e se entra no laço
 					}
 
-					x = (((r % n) * r) % n); //x Sempre o mesmo, e depois de rodar tarefe P o x passa a ser o mesmo do x da P
+					x = (((r % n) * r) % n);
 
 					printf("C %lu\n", x);
-					//iniciado = true;
 				}
 				else{
 
@@ -89,23 +87,24 @@ void fabio(){
 
 			break;
 
-			case 'R': //falta corrigir a impressão de erro caso não foi iniciado ainda e caso ja tiver respondido
+			case 'R': //falta corrigir a impressão de erro caso ja tiver respondido
 
 				scanf("%d", &b);
 
-				/*if(resp || iniciado == false){
-					printf("E\n");
-					exit(0);
-				}*/
+				if(verificado == false){
 
-				if(b == 0){
+					printf("E\n");
+					// exit(0); depende de como for não responder a mais de uma tentativa de validação
+				}
+
+				if(b == 0 /*&& resp == false*/){
 
 					printf("C %lu\n", r);
 					r = 0;
 					resp = true;
 				}
 
-				else if(b == 1){
+				else if(b == 1 /*&& resp == false*/){
 
 					y = (((r % n) * s) % n); //tem que adaptar pra caso r 128 bits
 					printf("C %lu\n", y);
@@ -115,6 +114,7 @@ void fabio(){
 
 				else
 					printf("E\n");
+					// exit(0); depende de como for não responder a mais de uma tentativa de validação
 				
 			break;
 		}
@@ -125,14 +125,12 @@ void fabio(){
 
 void patricia(char tarefa){
 
-
 }
 
-void teodoro(char tarefa){ // TODO CAGADO
+/*void teodoro(char tarefa){ // TODO CAGADO
 
 	unsigned long int p, q;
 	char num[50];
-	gint n;
 
 	if(tarefa == 'I'){
 
@@ -146,17 +144,14 @@ void teodoro(char tarefa){ // TODO CAGADO
 
 		printf("%s\n", num);
 	}
-}
+}*/
 
 int main(int argc, char *argv[]){
-
-	char tarefa;
 
 	switch(*argv[1]){
 
 		case 'F':
-
-			fabio(tarefa);
+			fabio();
 		break;
 	}
 
