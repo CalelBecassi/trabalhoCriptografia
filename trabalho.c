@@ -5,7 +5,7 @@
 #include<string.h>
 #include<stdbool.h>
 
-bool verificado = false, resp = false;
+bool verificado = false, resp = false, validar = true;
 
 unsigned long int mdc(int x, int y){
 		int resto;
@@ -24,7 +24,7 @@ unsigned long int mdc(int x, int y){
 void fabio(){
 
 	char tarefa;
-	unsigned long int r, x, n, s, v, y;
+	unsigned long int r, x, n, s, v, y, ok;
 	int b;
 
 	while(tarefa != 'T'){
@@ -37,7 +37,8 @@ void fabio(){
 
 				scanf("%lu %lu %lu", &n, &s, &v);
 
-				if(((((s * s) % n) * v) % n) == 1){
+				ok = (((s * s) % n) * v) % n;//FALTA COLOCAR PRA 128BITS
+				if(ok == 1){
 					printf("C\n");
 					verificado = true;
 				}
@@ -123,8 +124,126 @@ void fabio(){
 	printf("C\n");
 }	
 
-void patricia(char tarefa){
+void patricia(){
 
+	char tarefa;
+	unsigned long int n, v, x, fabx;
+	int b, t, torig;
+
+	while(tarefa != 'T'){
+
+		scanf("%c", &tarefa);
+
+		switch(tarefa){
+
+			case 'I':
+
+				scanf("%lu %lu %d", &n, &v, &t);
+				torig = t;
+
+				if(t > 50 || t < 3)
+					printf("E\n");
+				
+				else
+					printf("C\n");
+
+			break;
+
+			case 'Q':
+
+				if(validar){
+
+					scanf("%lu", &x);
+
+					srand((unsigned)time(NULL));
+					b = rand() % 2;
+
+					printf("C %d\n", b);
+					validar = false;
+				}
+				else
+					printf("E\n");
+
+			break;
+
+			case 'V':
+
+				scanf("%lu", &fabx);
+
+				if (t == 0){
+					printf("E\n");
+					break;
+				}
+
+				if(b == 0){
+
+					if(((fabx * fabx) % n) == x){
+						
+						printf("C %d", --t);
+						validar = true;
+					}
+
+					else
+						printf("E %d\n", t);
+				}
+
+				else if(b == 1){
+
+					if(((((fabx * fabx) % n) * v) % n) == x){
+
+						printf("C %d", --t);
+						validar = true;
+					}
+
+					else
+						printf("E %d\n", t);
+				}
+
+			break;
+
+			case 'C':
+
+				scanf("%lu %d %lu", &x, &b, &fabx);
+
+				if (t == 0){
+					printf("E 0\n");
+					break;
+				}
+			
+				if(b == 0){
+
+					if((((__uint128_t)fabx * fabx) % n) == x){
+						
+						printf("C %d\n", --t);
+						validar = true;
+					}
+
+					else{
+					
+						printf("E %d\n", t);
+						t = torig;
+					}
+				}
+
+				else if(b == 1){
+
+					if((((((__uint128_t)fabx * fabx) % n) * v) % n) == x){
+
+						printf("C %d\n", --t);
+						validar = true;
+					}
+
+					else{
+
+						printf("E %d\n", t);
+						t = torig;
+					}
+				}
+
+			break;
+		}
+	}
+	printf("C\n");
 }
 
 /*void teodoro(char tarefa){ // TODO CAGADO
@@ -152,6 +271,10 @@ int main(int argc, char *argv[]){
 
 		case 'F':
 			fabio();
+		break;
+
+		case 'P':
+			patricia();
 		break;
 	}
 
