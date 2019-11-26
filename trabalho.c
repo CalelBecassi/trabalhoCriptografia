@@ -64,7 +64,7 @@ void fabio(){
 
 				scanf("%lu %lu %lu", &n, &s, &v);
 
-				ok = (((s * s) % n) * v) % n;//FALTA COLOCAR PRA 128BITS
+				ok = ((((__uint128_t)s * s) % n) * v) % n;//FALTA COLOCAR PRA 128BITS
 				if(ok == 1){
 					printf("C\n");
 					verificado = true;
@@ -85,14 +85,13 @@ void fabio(){
 						r = rand();
 					}
 
-					x = (((r % n) * r) % n);
+					x = (((__uint128_t)r * r) % n);
 
 					printf("C %lu\n", x);
 				}
 				else{
 
 					printf("E\n");
-					exit(0);
 				}
 
 			break;
@@ -103,38 +102,42 @@ void fabio(){
 
 					scanf("%lu", &r);
 
-					x = (((r % n) * r) % n);
+					if(r > n){
+						printf("E\n");
+						break;
+					}
+
+					x = (((__uint128_t)r * r) % n);
 
 					printf("C %lu\n", x);
+					resp = false;
 				}
 				else{
 
 					printf("E\n");
-					exit(0);
 				}
 
 			break;
 
-			case 'R': //falta corrigir a impressão de erro caso ja tiver respondido
+			case 'R':
 
 				scanf("%d", &b);
 
 				if(verificado == false){
 
 					printf("E\n");
-					// exit(0); depende de como for não responder a mais de uma tentativa de validação
 				}
 
-				if(b == 0 /*&& resp == false*/){
+				if(b == 0 && resp == false){
 
 					printf("C %lu\n", r);
 					r = 0;
 					resp = true;
 				}
 
-				else if(b == 1 /*&& resp == false*/){
+				else if(b == 1 && resp == false){
 
-					y = (((r % n) * s) % n); //tem que adaptar pra caso r 128 bits
+					y = (((__uint128_t)r * s) % n); //tem que adaptar pra caso r 128 bits
 					printf("C %lu\n", y);
 					r = 0;
 					resp = true;
@@ -142,7 +145,6 @@ void fabio(){
 
 				else
 					printf("E\n");
-					// exit(0); depende de como for não responder a mais de uma tentativa de validação
 				
 			break;
 		}
@@ -150,7 +152,7 @@ void fabio(){
 	printf("C\n");
 }	
 
-/*void patricia(){
+void patricia(){
 
 	char tarefa;
 	unsigned long int n, v, x, fabx;
@@ -270,7 +272,7 @@ void fabio(){
 		}
 	}
 	printf("C\n");
-}     TIRANDO PRA PODER TESTAR TEODORO SEM DAR ERRO NO VS(BUG)*/
+}
 
 void teodoro(){ // TODO CAGADO
 
@@ -319,9 +321,9 @@ int main(int argc, char *argv[]){
 			fabio();
 		break;
 
-		/*case 'P':
+		case 'P':
 			patricia();
-		break;*/
+		break;
 
 		case 'T':
 			teodoro();
