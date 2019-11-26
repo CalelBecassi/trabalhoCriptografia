@@ -21,7 +21,7 @@ unsigned long int mdc(int x, int y){
     	return x;
 }
 
-void euclidesEstendido(int a, int b){
+unsigned long int euclidesEstendido(int a, int b){
 
     int m2, m1, m, n2, n1, n, resto, quo, aorig, borig;
 
@@ -45,7 +45,7 @@ void euclidesEstendido(int a, int b){
 	} while(resto != 0);
 
 	if(((aorig*m2) + (borig * n2)) == a)
-		printf("DEU CERTO m = %d n = %d\n", m2, n2); //TIRAR PRINTF DEPOIS
+		return m2; //TIRAR PRINTF DEPOIS//OQ EU MANDO ?
 }
 
 void fabio(){
@@ -64,7 +64,7 @@ void fabio(){
 
 				scanf("%lu %lu %lu", &n, &s, &v);
 
-				ok = ((((__uint128_t)s * s) % n) * v) % n;//FALTA COLOCAR PRA 128BITS
+				ok = ((((__uint128_t)s * s) % n) * v) % n;
 				if(ok == 1){
 					printf("C\n");
 					verificado = true;
@@ -293,16 +293,22 @@ void teodoro(){ // TODO CAGADO
 
 			break;	
 
-			case 'A':
+			case 'A'://INCOMPLETO
 
-				srand((unsigned)time(NULL));
-				s = rand() % n - 1;
+				srand((unsigned)time(NULL));//falta verificar se é uniformemente distribuido
+				s = rand() % (n - 1);
 
 				printf("%d\n", s);
 
 			break;
 
 			case 'F':
+
+				scanf("%lu", &s);
+				euclidesEstendido((s*s), n);
+
+				
+
 			break;
 		}
 	}
