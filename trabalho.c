@@ -23,7 +23,7 @@ unsigned long int mdc(int x, int y){
 
 long int euclidesEstendido(long int a, long int b){
 
-    long int m2, m1, m, n2, n1, n, resto, quo, aorig, borig;
+    long int m2, m1, m, n2, n1, n, resto, quo, borig;
 
 	borig = b;
 
@@ -174,14 +174,16 @@ void patricia(){
 				if(t > 50 || t < 3)
 					printf("E\n");
 				
-				else
+				else{
 					printf("C\n");
+					verificado = true;
+				}
 
 			break;
 
 			case 'Q':
 
-				if(validar){
+				if(validar && verificado){ //PODE TER ERRO AQUI
 
 					scanf("%lu", &x);
 
@@ -200,7 +202,7 @@ void patricia(){
 
 				scanf("%lu", &fabx);
 
-				if (t == 0){
+				if (t == 0 || verificado == false){
 					printf("E\n");
 					break;
 				}
@@ -232,6 +234,11 @@ void patricia(){
 			break;
 
 			case 'C':
+
+				if(verificado == false){
+					printf("E\n");
+					break;
+				}
 
 				scanf("%lu %d %lu", &x, &b, &fabx);
 
@@ -289,30 +296,42 @@ void teodoro(){
 
 			case 'I':
 
-				scanf("%lu %lu", &p, &q);
+				scanf("%li %li", &p, &q);
 				n = p * q;
-				printf("C %lu\n", n);
+				printf("C %li\n", n);
+
+				verificado = true;
 
 			break;	
 
 			case 'A'://INCOMPLETO
 
+				if(verificado == false){
+					printf("E\n");
+					break;
+				}
+
 				srand((unsigned)time(NULL));//falta verificar se é uniformemente distribuido
 				s = rand() % (n - 1);
 
-				printf("%d\n", s);
+				printf("%li\n", s);
 
 			break;
 
 			case 'F':
 
-				scanf("%lu", &s);
+				if(verificado == false){
+					printf("E\n");
+					break;
+				}
+
+				scanf("%li", &s);
 				ss = ((__uint128_t)s * s);
 
 				v = euclidesEstendido(ss, n);
 
 				if(((((((__uint128_t)s * s) % n) * v) % n) == 1) && s < n)
-					printf("C %lu\n", v);
+					printf("C %li\n", v);
 				else
 					printf("E\n");
 
@@ -339,9 +358,16 @@ void ester(){
 				scanf("%lu %lu", &n, &v);
 				printf("C\n");
 
+				verificado = true;
+
 			break;
 
 			case 'P'://conferir depois
+
+				if(verificado == false){
+					printf("E\n");
+					break;
+				}
 
 				scanf("%d", &b);
 
@@ -368,7 +394,12 @@ void ester(){
 
 			case 'S':
 
-				scanf("%d %d", x0, x1);
+				if(verificado == false){
+					printf("E\n");
+					break;
+				}
+
+				scanf("%lu %lu", &x0, &x1);
 
 				s = (euclidesEstendido(x0, n) * x1) % n;
 
