@@ -21,6 +21,33 @@ unsigned long int mdc(int x, int y){
     	return x;
 }
 
+void euclidesEstendido(int a, int b){
+
+    int m2, m1, m, n2, n1, n, resto, quo, aorig, borig;
+
+	aorig = a;
+	borig = b;
+
+	m2 = 1; m1 = 0;
+	n2 = 0; n1 = 1;
+
+	do{
+		resto = a % b;
+		quo = a / b;
+
+		m = m2 - (m1 * quo);
+		n = n2 - (n1 * quo);
+		m2 = m1; m1 = m; n2 = n1; n1 = n;
+
+		a = b;
+		b = resto;
+
+	} while(resto != 0);
+
+	if(((aorig*m2) + (borig * n2)) == a)
+		printf("DEU CERTO m = %d n = %d\n", m2, n2); //TIRAR PRINTF DEPOIS
+}
+
 void fabio(){
 
 	char tarefa;
@@ -123,7 +150,7 @@ void fabio(){
 	printf("C\n");
 }	
 
-void patricia(){
+/*void patricia(){
 
 	char tarefa;
 	unsigned long int n, v, x, fabx;
@@ -243,11 +270,11 @@ void patricia(){
 		}
 	}
 	printf("C\n");
-}
+}     TIRANDO PRA PODER TESTAR TEODORO SEM DAR ERRO NO VS(BUG)*/
 
 void teodoro(){ // TODO CAGADO
 
-	unsigned long int p, q, n;
+	unsigned long int p, q, n, s, v;
 	char tarefa;
 
 	while(tarefa != 'T'){
@@ -265,6 +292,12 @@ void teodoro(){ // TODO CAGADO
 			break;	
 
 			case 'A':
+
+				srand((unsigned)time(NULL));
+				s = rand() % n - 1;
+
+				printf("%d\n", s);
+
 			break;
 
 			case 'F':
@@ -286,9 +319,9 @@ int main(int argc, char *argv[]){
 			fabio();
 		break;
 
-		case 'P':
+		/*case 'P':
 			patricia();
-		break;
+		break;*/
 
 		case 'T':
 			teodoro();
