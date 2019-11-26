@@ -120,7 +120,6 @@ void fabio(){
 			break;
 		}
 	}
-
 	printf("C\n");
 }	
 
@@ -184,7 +183,7 @@ void patricia(){
 					}
 
 					else
-						printf("E %d\n", t);
+						printf("E %d\n", t);//TAMBÉM DEVE REINICIAR O CONTADOR?
 				}
 
 				else if(b == 1){
@@ -196,7 +195,7 @@ void patricia(){
 					}
 
 					else
-						printf("E %d\n", t);
+						printf("E %d\n", t);//TAMBÉM DEVE REINICIAR O CONTADOR?
 				}
 
 			break;
@@ -246,24 +245,38 @@ void patricia(){
 	printf("C\n");
 }
 
-/*void teodoro(char tarefa){ // TODO CAGADO
+void teodoro(){ // TODO CAGADO
 
-	unsigned long int p, q;
-	char num[50];
+	unsigned long int p, q, n;
+	char tarefa;
 
-	if(tarefa == 'I'){
+	while(tarefa != 'T'){
 
-		scanf("%lu", &p);
-		printf("%lu\n", p );
-		scanf("%lu", &q);
+		scanf("%c", &tarefa);
 
-		n = 340282366920938463l;
+		switch(tarefa){
 
-		sprintf(num, "%lu", n);
+			case 'I':
 
-		printf("%s\n", num);
+				scanf("%lu %lu", &p, &q);
+				n = p * q;
+				printf("C %lu\n", n);
+
+			break;	
+
+			case 'A':
+			break;
+
+			case 'F':
+			break;
+		}
 	}
-}*/
+	printf("C\n");
+}
+
+void ester(){
+
+}
 
 int main(int argc, char *argv[]){
 
@@ -275,6 +288,14 @@ int main(int argc, char *argv[]){
 
 		case 'P':
 			patricia();
+		break;
+
+		case 'T':
+			teodoro();
+		break;
+
+		case 'E':
+			ester();
 		break;
 	}
 
