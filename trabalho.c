@@ -324,6 +324,44 @@ void teodoro(){ // TODO CAGADO
 
 void ester(){
 
+	char tarefa;
+	unsigned long int n, v, x, fabx;
+	int b;
+
+	while(tarefa != 'T'){
+
+		scanf("%c", &tarefa);
+
+		switch(tarefa){
+
+			case 'I':
+
+				scanf("%lu %lu", &n, &v);
+				printf("C\n");
+
+			break;
+
+			case 'P':
+
+				scanf("%d", &b);
+
+				if(b == 0){
+					
+
+				}
+
+				else if(b == 1){
+
+
+				}
+
+			break;
+
+			case 'S':
+			break;
+		}
+	}
+	printf("C\n");
 }
 
 int main(int argc, char *argv[]){
