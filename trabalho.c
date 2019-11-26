@@ -21,11 +21,10 @@ unsigned long int mdc(int x, int y){
     	return x;
 }
 
-unsigned long int euclidesEstendido(int a, int b){
+long int euclidesEstendido(long int a, long int b){
 
-    int m2, m1, m, n2, n1, n, resto, quo, aorig, borig;
+    long int m2, m1, m, n2, n1, n, resto, quo, aorig, borig;
 
-	aorig = a;
 	borig = b;
 
 	m2 = 1; m1 = 0;
@@ -44,8 +43,11 @@ unsigned long int euclidesEstendido(int a, int b){
 
 	} while(resto != 0);
 
-	if(((aorig*m2) + (borig * n2)) == a)
-		return m2; //TIRAR PRINTF DEPOIS//OQ EU MANDO ?
+	if(m2 < 0)
+		return (m2 + borig);
+	else
+		return m2;
+
 }
 
 void fabio(){
@@ -276,7 +278,7 @@ void patricia(){
 
 void teodoro(){ // TODO CAGADO
 
-	unsigned long int p, q, n, s, v;
+	long int p, q, n, s, v, ss;
 	char tarefa;
 
 	while(tarefa != 'T'){
@@ -305,9 +307,14 @@ void teodoro(){ // TODO CAGADO
 			case 'F':
 
 				scanf("%lu", &s);
-				euclidesEstendido((s*s), n);
+				ss = ((__uint128_t)s * s);
 
-				
+				v = euclidesEstendido(ss, n);
+
+				if(((((((__uint128_t)s * s) % n) * v) % n) == 1) && s < n)
+					printf("C %lu\n", v);
+				else
+					printf("E\n");
 
 			break;
 		}
