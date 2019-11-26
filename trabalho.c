@@ -207,7 +207,7 @@ void patricia(){
 
 				if(b == 0){
 
-					if(((fabx * fabx) % n) == x){
+					if((((__uint128_t)fabx * fabx) % n) == x){
 						
 						printf("C %d", --t);
 						validar = true;
@@ -219,7 +219,7 @@ void patricia(){
 
 				else if(b == 1){
 
-					if(((((fabx * fabx) % n) * v) % n) == x){
+					if((((((__uint128_t)fabx * fabx) % n) * v) % n) == x){
 
 						printf("C %d", --t);
 						validar = true;
@@ -276,7 +276,7 @@ void patricia(){
 	printf("C\n");
 }
 
-void teodoro(){ // TODO CAGADO
+void teodoro(){
 
 	long int p, q, n, s, v, ss;
 	char tarefa;
@@ -325,7 +325,7 @@ void teodoro(){ // TODO CAGADO
 void ester(){
 
 	char tarefa;
-	unsigned long int n, v, x, fabx;
+	unsigned long int n, v, x, fabx, x0, x1, s;
 	int b;
 
 	while(tarefa != 'T'){
@@ -341,23 +341,39 @@ void ester(){
 
 			break;
 
-			case 'P':
+			case 'P'://conferir depois
 
 				scanf("%d", &b);
 
 				if(b == 0){
 					
+					srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
+					fabx = rand();
+					x = (((__uint128_t)fabx * fabx) % n);
 
+					printf("C %lu %lu\n", x, fabx);
 				}
 
 				else if(b == 1){
 
+					srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
+					fabx = rand();
+					
+					x = (((((__uint128_t)fabx * fabx) % n) * v) % n);
 
+					printf("C %lu %lu\n", x, fabx);
 				}
 
 			break;
 
 			case 'S':
+
+				scanf("%d %d", x0, x1);
+
+				s = (euclidesEstendido(x0, n) * x1) % n;
+
+				printf("C %lu\n", s);
+
 			break;
 		}
 	}
