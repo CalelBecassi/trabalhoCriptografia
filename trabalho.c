@@ -83,7 +83,7 @@ void fabio(){
 					r = 0;
 					while(mdc(r, n) != 1){
 
-						srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
+						srand((unsigned)time(NULL));
 						r = rand();
 					}
 
@@ -139,7 +139,7 @@ void fabio(){
 
 				else if(b == 1 && resp == false){
 
-					y = (((__uint128_t)r * s) % n); //tem que adaptar pra caso r 128 bits
+					y = (((__uint128_t)r * s) % n);
 					printf("C %lu\n", y);
 					r = 0;
 					resp = true;
@@ -183,7 +183,7 @@ void patricia(){
 
 			case 'Q':
 
-				if(validar && verificado){ //PODE TER ERRO AQUI
+				if(validar && verificado){
 
 					scanf("%lu", &x);
 
@@ -215,8 +215,11 @@ void patricia(){
 						validar = true;
 					}
 
-					else
-						printf("E %d\n", t);//TAMBÉM DEVE REINICIAR O CONTADOR?
+					else{
+						
+						printf("E %d\n", t);
+						t = torig;
+					}
 				}
 
 				else if(b == 1){
@@ -227,8 +230,11 @@ void patricia(){
 						validar = true;
 					}
 
-					else
-						printf("E %d\n", t);//TAMBÉM DEVE REINICIAR O CONTADOR?
+					else{
+						
+						printf("E %d\n", t);
+						t = torig;
+					}
 				}
 
 			break;
@@ -304,14 +310,14 @@ void teodoro(){
 
 			break;	
 
-			case 'A'://INCOMPLETO
+			case 'A':
 
 				if(verificado == false){
 					printf("E\n");
 					break;
 				}
 
-				srand((unsigned)time(NULL));//falta verificar se é uniformemente distribuido
+				srand((unsigned)time(NULL));
 				s = rand() % (n - 1);
 
 				printf("%li\n", s);
@@ -362,7 +368,7 @@ void ester(){
 
 			break;
 
-			case 'P'://conferir depois
+			case 'P':
 
 				if(verificado == false){
 					printf("E\n");
@@ -373,7 +379,7 @@ void ester(){
 
 				if(b == 0){
 					
-					srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
+					srand((unsigned)time(NULL));
 					fabx = rand();
 					x = (((__uint128_t)fabx * fabx) % n);
 
@@ -382,7 +388,7 @@ void ester(){
 
 				else if(b == 1){
 
-					srand((unsigned)time(NULL));//falta usar "busca binaria" pra ele ser uniformemente distribuído
+					srand((unsigned)time(NULL));
 					fabx = rand();
 					
 					x = (((((__uint128_t)fabx * fabx) % n) * v) % n);
